@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<link rel="import" href="../polymer/polymer-element.html">
+<!--<link rel="import" href="../polymer/polymer-element.html">-->
+<link rel="import" href="../poly-prep/poly-prep-sync.html">
 
 <dom-module id="xtal-chart-istic">
   <template>
@@ -11,6 +12,9 @@
     </style>
     <div id="chartTarget"></div>
   </template>
+  <script>
+    xtal_elements_chart_istic_sync = true;
+  </script>
   <script src="../chartist/dist/chartist.js"></script>
   <script src="xtal-chart-istic.js"></script>
 </dom-module>

@@ -23,9 +23,23 @@
       <h3>Basic xtal-chart-istic demo</h3>
       <demo-snippet>
         <template>
-          <xtal-chart-istic></xtal-chart-istic>
+          <xtal-chart-istic draw line-chart></xtal-chart-istic>
+          <script>
+          document.querySelector('body > div > demo-snippet > xtal-chart-istic')
+            .chartData = {            
+              //         
+              // A labels array that can contain any sort of values
+              labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+              // Our series array that contains series objects or in this case series data arrays
+              series: [
+                  [5, 2, 4, 2, 0]
+              ]
+          };
+        </script>
         </template>
+        
       </demo-snippet>
     </div>
+    
   </body>
 </html>
