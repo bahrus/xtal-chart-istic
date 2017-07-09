@@ -21,21 +21,34 @@
   <body>
     <div class="vertical-section-container centered">
       <h3>Basic xtal-chart-istic demo</h3>
+      
       <demo-snippet>
         <template>
-          <xtal-chart-istic draw line-chart></xtal-chart-istic>
+          <dom-module id="my-component">
+            <template>
+              <xtal-chart-istic id="chartEl1" draw line-chart></xtal-chart-istic>
+            </template>
+          </dom-module>
           <script>
-          document.querySelector('body > div > demo-snippet > xtal-chart-istic')
-            .chartData = {            
-              //         
-              // A labels array that can contain any sort of values
-              labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-              // Our series array that contains series objects or in this case series data arrays
-              series: [
-                  [5, 2, 4, 2, 0]
-              ]
-          };
+            class MyComponent extends Polymer.Element{
+              static get is(){return 'my-component';}
+              connectedCallback(){
+                super.connectedCallback();
+                this.$.chartEl1.chartData = {            
+                    //         
+                    // A labels array that can contain any sort of values
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                    // Our series array that contains series objects or in this case series data arrays
+                    series: [
+                        [5, 2, 4, 2, 0]
+                    ]
+                };
+              }
+            }
+            customElements.define(MyComponent.is, MyComponent);
+          
         </script>
+        <my-component></my-component>
         </template>
         
       </demo-snippet>
