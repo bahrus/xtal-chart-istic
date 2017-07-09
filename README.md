@@ -47,6 +47,7 @@ Polymer wrapper around chartist.js charting library
             }
             customElements.define(MyComponent.is, MyComponent);
   </template>
+  <my-component></my-component>
 </custom-element-demo>
 ```
 -->
