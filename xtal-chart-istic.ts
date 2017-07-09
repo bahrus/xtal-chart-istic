@@ -3,11 +3,14 @@ module xtal.elements{
         data: Chartist.IChartistData,
         options: Chartist.ILineChartOptions
     }
+    export interface IXtalPieChartDataWithOptions{
+        data: Chartist.IChartistData,
+        options: Chartist.IPieChartOptions
+    }
     export interface IXtalChartisticProperties{
         draw: boolean | polymer.PropObjectType,
-        //lineChart: boolean | polymer.PropObjectType,
-        //lineChartData: Chartist.IChartistLineChart | polymer.PropObjectType,
         lineChartDataWithOptions: IXtalLineChartDataWithOptions | polymer.PropObjectType
+        pieChartDataWithOptions: IXtalPieChartDataWithOptions | polymer.PropObjectType
     }
     function initXtalChartIstic(){
         const elID = 'xtal-chart-istic';
@@ -23,18 +26,21 @@ module xtal.elements{
          */
         class XtalChartIstic extends xtal.elements['InitMerge'](Polymer.Element)  implements IXtalChartisticProperties {
             draw: boolean;
-            //lineChartData:Chartist.IChartistLineChart;
             lineChartDataWithOptions: IXtalLineChartDataWithOptions;
-            //lineChart: boolean;
+            pieChartDataWithOptions: IXtalLineChartDataWithOptions;
             static get is() { return 'xtal-chart-istic'; }
             static get properties() : IXtalChartisticProperties{
                 return {
+                    draw:{
+                        type: Boolean,
+                        observer: 'onPropChange'
+                    },
                     lineChartDataWithOptions:{
                         type: Object,
                         observer: 'onPropChange'
                     },
-                    draw:{
-                        type: Boolean,
+                    pieChartDataWithOptions:{
+                        type: Object,
                         observer: 'onPropChange'
                     },
                 };
@@ -43,11 +49,21 @@ module xtal.elements{
             onPropChange(){
                 if(!this.draw) return;
                 if(this.lineChartDataWithOptions){
-                    new Chartist.Line(this.$.chartTarget, 
-                        this.lineChartDataWithOptions.data, this.lineChartDataWithOptions);
+                    new Chartist.Line(
+                        this.$.chartTarget, 
+                        this.lineChartDataWithOptions.data, 
+                        this.lineChartDataWithOptions.options
+                    );
+                }
+                if(this.pieChartDataWithOptions){
+                    new Chartist.Pie(
+                        this.$.chartTarget, 
+                        this.pieChartDataWithOptions.data, 
+                        this.pieChartDataWithOptions.options
+                    );
                 }
                 
-                if(this.lineChart) new Chartist.Line(this.$.chartTarget, this.chartData);
+                
             }
             // connectedCallback(){
             //     super.connectedCallback();
