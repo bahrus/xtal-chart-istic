@@ -1,12 +1,18 @@
 module xtal.elements{
+    export interface IXtalLineChartDataWithOptions{
+        data: Chartist.IChartistData,
+        options: Chartist.ILineChartOptions
+    }
+    export interface IXtalChartisticProperties{
+        draw: boolean | polymer.PropObjectType,
+        //lineChart: boolean | polymer.PropObjectType,
+        //lineChartData: Chartist.IChartistLineChart | polymer.PropObjectType,
+        lineChartDataWithOptions: IXtalLineChartDataWithOptions | polymer.PropObjectType
+    }
     function initXtalChartIstic(){
         const elID = 'xtal-chart-istic';
         if(customElements.get(elID)) return;
-        interface IXtalChartisticProperties{
-            draw: boolean | polymer.PropObjectType,
-            lineChart: boolean | polymer.PropObjectType,
-            chartData: object | polymer.PropObjectType,
-        }
+        
         /**
          * `xtal-chart-istic`
          * Polymer wrapper around chartist.js charting library
@@ -16,11 +22,14 @@ module xtal.elements{
          * @demo demo/index.html
          */
         class XtalChartIstic extends xtal.elements['InitMerge'](Polymer.Element)  implements IXtalChartisticProperties {
-            draw: boolean;chartData:any;lineChart: boolean;
+            draw: boolean;
+            //lineChartData:Chartist.IChartistLineChart;
+            lineChartDataWithOptions: IXtalLineChartDataWithOptions;
+            //lineChart: boolean;
             static get is() { return 'xtal-chart-istic'; }
             static get properties() : IXtalChartisticProperties{
                 return {
-                    chartData:{
+                    lineChartDataWithOptions:{
                         type: Object,
                         observer: 'onPropChange'
                     },
@@ -28,16 +37,16 @@ module xtal.elements{
                         type: Boolean,
                         observer: 'onPropChange'
                     },
-                    lineChart:{
-                        type: Boolean,
-                        observer: 'onPropChange'
-                    }
                 };
 
             }
             onPropChange(){
                 if(!this.draw) return;
-                if(!this.chartData) return;
+                if(this.lineChartDataWithOptions){
+                    new Chartist.Line(this.$.chartTarget, 
+                        this.lineChartDataWithOptions.data, this.lineChartDataWithOptions);
+                }
+                
                 if(this.lineChart) new Chartist.Line(this.$.chartTarget, this.chartData);
             }
             // connectedCallback(){

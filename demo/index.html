@@ -26,7 +26,7 @@
         <template>
           <dom-module id="my-component">
             <template>
-              <xtal-chart-istic id="chartEl1" draw line-chart></xtal-chart-istic>
+              <xtal-chart-istic id="chartEl1" draw></xtal-chart-istic>
             </template>
           </dom-module>
           <script>
@@ -34,14 +34,14 @@
               static get is(){return 'my-component';}
               connectedCallback(){
                 super.connectedCallback();
-                this.$.chartEl1.chartData = {            
-                    //         
-                    // A labels array that can contain any sort of values
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-                    // Our series array that contains series objects or in this case series data arrays
-                    series: [
-                        [5, 2, 4, 2, 0]
-                    ]
+                this.$.chartEl1.lineChartDataWithOptions = {
+                    data:{
+                      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                      series: [
+                          [5, 2, 4, 2, 0]
+                      ]
+                    }            
+                    
                 };
               }
             }

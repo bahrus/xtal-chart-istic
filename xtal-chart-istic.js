@@ -15,10 +15,11 @@ var xtal;
              * @demo demo/index.html
              */
             class XtalChartIstic extends xtal.elements['InitMerge'](Polymer.Element) {
+                //lineChart: boolean;
                 static get is() { return 'xtal-chart-istic'; }
                 static get properties() {
                     return {
-                        chartData: {
+                        lineChartDataWithOptions: {
                             type: Object,
                             observer: 'onPropChange'
                         },
@@ -26,17 +27,14 @@ var xtal;
                             type: Boolean,
                             observer: 'onPropChange'
                         },
-                        lineChart: {
-                            type: Boolean,
-                            observer: 'onPropChange'
-                        }
                     };
                 }
                 onPropChange() {
                     if (!this.draw)
                         return;
-                    if (!this.chartData)
-                        return;
+                    if (this.lineChartDataWithOptions) {
+                        new Chartist.Line(this.$.chartTarget, this.lineChartDataWithOptions.data, this.lineChartDataWithOptions);
+                    }
                     if (this.lineChart)
                         new Chartist.Line(this.$.chartTarget, this.chartData);
                 }
