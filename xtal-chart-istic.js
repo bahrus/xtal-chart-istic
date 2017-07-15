@@ -22,6 +22,10 @@ var xtal;
                             type: Boolean,
                             observer: 'onPropChange'
                         },
+                        barChartDataWithOptions: {
+                            type: Object,
+                            observer: 'onPropChange'
+                        },
                         lineChartDataWithOptions: {
                             type: Object,
                             observer: 'onPropChange'
@@ -36,10 +40,13 @@ var xtal;
                     if (!this.draw)
                         return;
                     if (this.lineChartDataWithOptions) {
-                        new Chartist.Line(this.$.chartTarget, this.lineChartDataWithOptions.data, this.lineChartDataWithOptions.options);
+                        this.chart = new Chartist.Line(this.$.chartTarget, this.lineChartDataWithOptions.data, this.lineChartDataWithOptions.options, this.lineChartDataWithOptions.responsiveOptions);
                     }
                     if (this.pieChartDataWithOptions) {
-                        new Chartist.Pie(this.$.chartTarget, this.pieChartDataWithOptions.data, this.pieChartDataWithOptions.options);
+                        this.chart = new Chartist.Pie(this.$.chartTarget, this.pieChartDataWithOptions.data, this.pieChartDataWithOptions.options, this.pieChartDataWithOptions.responsiveOptions);
+                    }
+                    if (this.barChartDataWithOptions) {
+                        this.chart = new Chartist.Bar(this.$.chartTarget, this.barChartDataWithOptions.data, this.barChartDataWithOptions.options, this.barChartDataWithOptions.responsiveOptions);
                     }
                 }
             }

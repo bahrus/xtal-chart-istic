@@ -1,16 +1,24 @@
 module xtal.elements{
     export interface IXtalLineChartDataWithOptions{
         data: Chartist.IChartistData,
-        options: Chartist.ILineChartOptions
+        options: Chartist.ILineChartOptions,
+        responsiveOptions: Array<Chartist.IResponsiveOptionTuple<Chartist.ILineChartOptions>>
     }
     export interface IXtalPieChartDataWithOptions{
         data: Chartist.IChartistData,
-        options: Chartist.IPieChartOptions
+        options: Chartist.IPieChartOptions,
+        responsiveOptions: Array<Chartist.IResponsiveOptionTuple<Chartist.IPieChartOptions>>
+    }
+    export interface IXtalBarChartDataWithOptions{
+        data: Chartist.IChartistData,
+        options: Chartist.IBarChartOptions,
+        responsiveOptions: Array<Chartist.IResponsiveOptionTuple<Chartist.IBarChartOptions>>
     }
     export interface IXtalChartisticProperties{
         draw: boolean | polymer.PropObjectType,
-        lineChartDataWithOptions: IXtalLineChartDataWithOptions | polymer.PropObjectType
-        pieChartDataWithOptions: IXtalPieChartDataWithOptions | polymer.PropObjectType
+        lineChartDataWithOptions: IXtalLineChartDataWithOptions | polymer.PropObjectType,
+        pieChartDataWithOptions: IXtalPieChartDataWithOptions | polymer.PropObjectType,
+        barChartDataWithOptions: IXtalBarChartDataWithOptions | polymer.PropObjectType,
     }
     function initXtalChartIstic(){
         const elID = 'xtal-chart-istic';
@@ -28,11 +36,17 @@ module xtal.elements{
             draw: boolean;
             lineChartDataWithOptions: IXtalLineChartDataWithOptions;
             pieChartDataWithOptions: IXtalLineChartDataWithOptions;
+            barChartDataWithOptions: IXtalBarChartDataWithOptions;
+            chart: any; //TODO
             static get is() { return 'xtal-chart-istic'; }
             static get properties() : IXtalChartisticProperties{
                 return {
                     draw:{
                         type: Boolean,
+                        observer: 'onPropChange'
+                    },
+                    barChartDataWithOptions:{
+                        type: Object,
                         observer: 'onPropChange'
                     },
                     lineChartDataWithOptions:{
@@ -49,38 +63,31 @@ module xtal.elements{
             onPropChange(){
                 if(!this.draw) return;
                 if(this.lineChartDataWithOptions){
-                    new Chartist.Line(
+                    this.chart = new Chartist.Line(
                         this.$.chartTarget, 
                         this.lineChartDataWithOptions.data, 
-                        this.lineChartDataWithOptions.options
+                        this.lineChartDataWithOptions.options,
+                        this.lineChartDataWithOptions.responsiveOptions
                     );
                 }
                 if(this.pieChartDataWithOptions){
-                    new Chartist.Pie(
+                    this.chart = new Chartist.Pie(
                         this.$.chartTarget, 
                         this.pieChartDataWithOptions.data, 
-                        this.pieChartDataWithOptions.options
+                        this.pieChartDataWithOptions.options,
+                        this.pieChartDataWithOptions.responsiveOptions,
                     );
                 }
-                
+                if(this.barChartDataWithOptions){
+                    this.chart = new Chartist.Bar(
+                        this.$.chartTarget,
+                        this.barChartDataWithOptions.data,
+                        this.barChartDataWithOptions.options,
+                        this.barChartDataWithOptions.responsiveOptions
+                    )
+                }
                 
             }
-            // connectedCallback(){
-            //     super.connectedCallback();
-            //     var data = {
-            //         // A labels array that can contain any sort of values
-            //         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-            //         // Our series array that contains series objects or in this case series data arrays
-            //         series: [
-            //             [5, 2, 4, 2, 0]
-            //         ]
-            //     };
-
-            //     // Create a new line chart object where as first parameter we pass in a selector
-            //     // that is resolving to our chart container element. The Second parameter
-            //     // is the actual data object.
-            //     new Chartist.Line(this.$.chartTarget, data);
-            // }
         }
 
         customElements.define(XtalChartIstic.is, XtalChartIstic);

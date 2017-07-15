@@ -8,7 +8,7 @@ Polymer wrapper around chartist.js charting library
 ```
 <custom-element-demo>
   <template>
-    <link rel="import" href="../xtal-chart-istic-sync.html">
+    <link rel="import" href="../xtal-chart-istic.html">
           <dom-module id="my-component">
             <template>
               <xtal-chart-istic draw line-chart-data-with-options="[[example1]]"></xtal-chart-istic>

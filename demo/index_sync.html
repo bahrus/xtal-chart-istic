@@ -28,6 +28,7 @@
             <template>
               <xtal-chart-istic draw line-chart-data-with-options="[[example1]]"></xtal-chart-istic>
               <xtal-chart-istic draw pie-chart-data-with-options="[[example2]]"></xtal-chart-istic>
+              <xtal-chart-istic draw bar-chart-data-with-options="[[example3]]"></xtal-chart-istic>
             </template>
           </dom-module>
           <script>
@@ -56,6 +57,12 @@
                       donutWidth: 20,
                       startAngle: 270,
                       total: 200
+                  }
+                }
+                this.example3 = {
+                  data:{
+                    labels: [1, 2, 3, 4],
+                    series: [[100, 120, 180, 200]]
                   }
                 }
               }
