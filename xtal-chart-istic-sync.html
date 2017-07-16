@@ -3,10 +3,11 @@
 
 <dom-module id="xtal-chart-istic">
   <template>
-    <link rel="stylesheet" href$="[[cssPath]]">
+    <style include="xtal-chart-istic-theme"></style>
     <style>
       :host {
         display: block;
+        @apply --my-custom-mixin;
       }
     </style>
     <div id="chartTarget"></div>
