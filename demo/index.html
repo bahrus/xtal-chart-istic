@@ -1,85 +1,160 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>xtal-chart-istic demo</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link async rel="import" href="../../poly-prep/full-poly-prep.html">
-    
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-      </style>
-    </custom-style>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic xtal-chart-istic demo</h3>
-      <full-poly-prep>
-        <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-        <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-        <link rel="import" href="../xtal-chart-istic-sync.html">
-        <link rel="import" href="default-theme.html">
+  <title>xtal-chart-istic demo</title>
 
-      </full-poly-prep>
-      <demo-snippet>
-        <template>
-          <dom-module id="my-component">
-            <template>
-              <xtal-chart-istic draw line-chart-data-with-options="[[example1]]"></xtal-chart-istic>
-              <xtal-chart-istic draw pie-chart-data-with-options="[[example2]]"></xtal-chart-istic>
-              <xtal-chart-istic draw bar-chart-data-with-options="[[example3]]"></xtal-chart-istic>
-            </template>
-          </dom-module>
-          <script>
-            function initMyComponent(){
-              class MyComponent extends Polymer.Element{
-                static get is(){return 'my-component';}
-                connectedCallback(){
-                  super.connectedCallback();
-                  this.example1 = {
-                    data:{
-                      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-                      series: [
-                          [5, 2, 4, 2, 0]
-                      ]
-                    },
-                    options:{
-                      width: '600px',
-                      height: '300px',
-                    }    
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link async rel="import" href="../../poly-prep/full-poly-prep.html">
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+
+    </style>
+  </custom-style>
+</head>
+
+<body>
+  <div class="vertical-section-container centered">
+    <h3>Basic xtal-chart-istic demo</h3>
+    <full-poly-prep>
+      <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+      <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+      <link rel="import" href="../xtal-chart-istic-sync.html">
+      <link rel="import" href="default-theme.html">
+
+    </full-poly-prep>
+    <demo-snippet>
+      <template>
+        <dom-module id="my-component">
+          <template>
+            Example 1 CREATING A CHART WITH FIXED DIMENSIONS<br>
+            <xtal-chart-istic draw line-chart-data-with-options="[[example1]]"></xtal-chart-istic>
+            Example 2 SIMPLE BAR Chart<br>
+            <xtal-chart-istic draw pie-chart-data-with-options="[[example2]]"></xtal-chart-istic>
+            Example 3 CONFIGURING CHART<br>
+            <xtal-chart-istic draw bar-chart-data-with-options="[[example3]]"></xtal-chart-istic>
+            Example 4
+            <xtal-chart-istic draw line-chart-data-with-options="[[example4]]"></xtal-chart-istic>
+            Example 5 RESPONSIVE SUGAR TOPPING
+            <xtal-chart-istic draw bar-chart-data-with-options="[[example5]]"></xtal-chart-istic>
+          </template>
+        </dom-module>
+        <script>
+          function initMyComponent() {
+            class MyComponent extends Polymer.Element {
+              static get is() { return 'my-component'; }
+              connectedCallback() {
+                super.connectedCallback();
+                this.example1 = {
+                  data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                    series: [
+                      [5, 2, 4, 2, 0]
+                    ]
+                  },
+                  options: {
+                    width: '600px',
+                    height: '300px',
                   }
-                  this.example2 = {
-                    data:{
-                      series: [20, 10, 30, 40]
-                    },
-                    options:{
-                        donut: true,
-                        donutWidth: 20,
-                        startAngle: 270,
-                        total: 200
-                    }
+                }
+                this.example2 = {
+                  data: {
+                    series: [20, 10, 30, 40]
+                  },
+                  options: {
+                    donut: true,
+                    donutWidth: 20,
+                    startAngle: 270,
+                    total: 200
                   }
-                  this.example3 = {
-                    data:{
-                      labels: [1, 2, 3, 4],
-                      series: [[100, 120, 180, 200]]
+                }
+                this.example3 = {
+                  data: {
+                    labels: [1, 2, 3, 4],
+                    series: [[100, 120, 180, 200]]
+                  }
+                }
+                this.example4 = {
+                  data: {
+                    labels: ['Week1', 'Week2', 'Week3', 'Week4', 'Week5', 'Week6'],
+                    series: [
+                      [5, 4, 3, 7, 5, 10],
+                      [3, 2, 9, 5, 4, 6],
+                      [2, 1, -3, -4, -2, 0]
+                    ]
+                  },
+                  options: {
+                    // Don't draw the line chart points
+                    showPoint: false,
+                    // Disable line smoothing
+                    lineSmooth: false,
+                    // X-Axis specific configuration
+                    axisX: {
+                      // We can disable the grid for this axis
+                      showGrid: false,
+                      // and also don't show the label
+                      showLabel: false
+                    },
+                    // Y-Axis specific configuration
+                    axisY: {
+                      // Lets offset the chart a bit from the labels
+                      offset: 60,
+                      // The label interpolation function enables you to modify the values
+                      // used for the labels on each axis. Here we are converting the
+                      // values into million pound.
+                      labelInterpolationFnc: function (value) {
+                        return '$' + value + 'm';
+                      }
                     }
                   }
                 }
+                this.example5 = {
+                  data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    series: [
+                      [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+                      [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
+                    ]
+                  },
+                  options: {
+                    seriesBarDistance: 15
+                  },
+                  responsiveOptions: [
+                    ['screen and (min-width: 641px) and (max-width: 1024px)', {
+                      seriesBarDistance: 10,
+                      axisX: {
+                        labelInterpolationFnc: function (value) {
+                          return value;
+                        }
+                      }
+                    }],
+                    ['screen and (max-width: 640px)', {
+                      seriesBarDistance: 5,
+                      axisX: {
+                        labelInterpolationFnc: function (value) {
+                          return value[0];
+                        }
+                      }
+                    }]
+                  ]
+                }
               }
-              customElements.define(MyComponent.is, MyComponent);
             }
+            customElements.define(MyComponent.is, MyComponent);
+          }
 
-            customElements.whenDefined('xtal-chart-istic').then(() => initMyComponent());
+          customElements.whenDefined('xtal-chart-istic').then(() => initMyComponent());
         </script>
         <my-component></my-component>
-        </template>
-        
-      </demo-snippet>
-    </div>
-    
-  </body>
+      </template>
+
+    </demo-snippet>
+  </div>
+
+</body>
+
 </html>
