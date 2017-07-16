@@ -6,6 +6,7 @@ var xtal;
             const elID = 'xtal-chart-istic';
             if (customElements.get(elID))
                 return;
+            const initMerge = xtal.elements['InitMerge'];
             /**
              * `xtal-chart-istic`
              * Polymer wrapper around chartist.js charting library
@@ -14,7 +15,7 @@ var xtal;
              * @polymer
              * @demo demo/index.html
              */
-            class XtalChartIstic extends xtal.elements['InitMerge'](Polymer.Element) {
+            class XtalChartIstic extends initMerge(Polymer.Element) {
                 static get is() { return 'xtal-chart-istic'; }
                 static get properties() {
                     return {
@@ -34,8 +35,17 @@ var xtal;
                             type: Object,
                             observer: 'onPropChange'
                         },
+                        cssPath: {
+                            type: String,
+                            value: '../../chartist/dist/chartist.css'
+                        }
                     };
                 }
+                // _stampTemplate(template){
+                //     console.log('before stamp template')
+                //     super._stampTemplate(template);
+                //     console.log('after stamp template')
+                // }
                 onPropChange() {
                     if (!this.draw)
                         return;

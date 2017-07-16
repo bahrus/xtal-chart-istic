@@ -19,11 +19,13 @@ module xtal.elements{
         lineChartDataWithOptions: IXtalLineChartDataWithOptions | polymer.PropObjectType,
         pieChartDataWithOptions: IXtalPieChartDataWithOptions | polymer.PropObjectType,
         barChartDataWithOptions: IXtalBarChartDataWithOptions | polymer.PropObjectType,
+        cssPath: string | polymer.PropObjectType,
     }
     function initXtalChartIstic(){
         const elID = 'xtal-chart-istic';
         if(customElements.get(elID)) return;
-        
+        type Constructor<T = {}> = new (...args: any[]) => T;
+        const initMerge = xtal.elements['InitMerge'];
         /**
          * `xtal-chart-istic`
          * Polymer wrapper around chartist.js charting library
@@ -32,12 +34,13 @@ module xtal.elements{
          * @polymer
          * @demo demo/index.html
          */
-        class XtalChartIstic extends xtal.elements['InitMerge'](Polymer.Element)  implements IXtalChartisticProperties {
+        class XtalChartIstic extends initMerge(Polymer.Element)  implements IXtalChartisticProperties {
             draw: boolean;
             lineChartDataWithOptions: IXtalLineChartDataWithOptions;
             pieChartDataWithOptions: IXtalLineChartDataWithOptions;
             barChartDataWithOptions: IXtalBarChartDataWithOptions;
             chart: any; //TODO
+            cssPath: string;
             static get is() { return 'xtal-chart-istic'; }
             static get properties() : IXtalChartisticProperties{
                 return {
@@ -57,9 +60,18 @@ module xtal.elements{
                         type: Object,
                         observer: 'onPropChange'
                     },
+                    cssPath:{
+                        type: String,
+                        value: '../../chartist/dist/chartist.css'
+                    }
                 };
 
             }
+            // _stampTemplate(template){
+            //     console.log('before stamp template')
+            //     super._stampTemplate(template);
+            //     console.log('after stamp template')
+            // }
             onPropChange(){
                 if(!this.draw) return;
                 if(this.lineChartDataWithOptions){
