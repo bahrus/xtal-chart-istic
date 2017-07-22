@@ -3,6 +3,7 @@
 
 <dom-module id="xtal-chart-istic">
   <template>
+    <link rel="stylesheet" type="text/css" href="[[cssPath]]">
     <style include="xtal-chart-istic-theme"></style>
     <style>
       :host {
@@ -15,6 +16,6 @@
   <script>
     xtal_elements_chart_istic_sync = true;
   </script>
-  <script src="../chartist/dist/chartist.js"></script>
+  <script src="../chartist/dist/chartist.min.js"></script>
   <script src="xtal-chart-istic.js"></script>
 </dom-module>

@@ -3,6 +3,7 @@
 <link rel="import" href="../shadycss/apply-shim.html">
 <dom-module id="xtal-chart-istic">
   <template>
+    <link rel="stylesheet" type="text/css" href="[[cssPath]]">
     <style include="xtal-chart-istic-theme"></style>
     <style>
       :host {
@@ -12,6 +13,6 @@
     </style>
     <div id="chartTarget"></div>
   </template>
-  <script async src="../chartist/dist/chartist.js"></script>
+  <script async src="../chartist/dist/chartist.min.js"></script>
   <script async src="xtal-chart-istic.js"></script>
 </dom-module>

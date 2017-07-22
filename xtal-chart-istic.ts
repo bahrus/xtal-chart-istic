@@ -62,7 +62,7 @@ module xtal.elements{
                     },
                     cssPath:{
                         type: String,
-                        value: '../../chartist/dist/chartist.css'
+                        value: '../../chartist/dist/chartist.min.css'
                     }
                 };
 

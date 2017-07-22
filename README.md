@@ -2,7 +2,11 @@
 
 # \<xtal-chart-istic\>
 
-Polymer wrapper around chartist.js charting library
+Polymer wrapper around the [chartist.js](https://gionkunz.github.io/chartist-js/) charting library.  Among the virtues of this library:
+
+1)  Strong support for styling via css
+2)  First class support for responsive design
+3)  A small footprint -- The JavaScript is only about 12 KB minified / gzipped.  The css file adds another 2KB.  This is one of the smallest charting libraries out there.
 
 <!--
 ```
