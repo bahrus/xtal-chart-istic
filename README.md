@@ -20,36 +20,39 @@ Polymer wrapper around the [chartist.js](https://gionkunz.github.io/chartist-js/
             </template>
           </dom-module>
           <script>
-            class MyComponent extends Polymer.Element{
-              static get is(){return 'my-component';}
-              connectedCallback(){
-                super.connectedCallback();
-                this.example1 = {
-                  data:{
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-                    series: [
-                        [5, 2, 4, 2, 0]
-                    ]
-                  },
-                  options:{
-                    width: '600px',
-                    height: '300px',
-                  }    
-                }
-                this.example2 = {
-                  data:{
-                    series: [20, 10, 30, 40]
-                  },
-                  options:{
-                      donut: true,
-                      donutWidth: 20,
-                      startAngle: 270,
-                      total: 200
+            function initMyComponent(){
+              class MyComponent extends Polymer.Element{
+                static get is(){return 'my-component';}
+                connectedCallback(){
+                  super.connectedCallback();
+                  this.example1 = {
+                    data:{
+                      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                      series: [
+                          [5, 2, 4, 2, 0]
+                      ]
+                    },
+                    options:{
+                      width: '600px',
+                      height: '300px',
+                    }    
+                  }
+                  this.example2 = {
+                    data:{
+                      series: [20, 10, 30, 40]
+                    },
+                    options:{
+                        donut: true,
+                        donutWidth: 20,
+                        startAngle: 270,
+                        total: 200
+                    }
                   }
                 }
               }
+              customElements.define(MyComponent.is, MyComponent);
             }
-            customElements.define(MyComponent.is, MyComponent);
+            customElements.whenDefined('xtal-chart-istic', () => initMyComponent())
         </script>
   </template>
   <my-component></my-component>
