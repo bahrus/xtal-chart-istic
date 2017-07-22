@@ -12,7 +12,7 @@ Polymer wrapper around the [chartist.js](https://gionkunz.github.io/chartist-js/
 ```
 <custom-element-demo>
   <template>
-    <link rel="import" href="../xtal-chart-istic.html">
+    <link rel="import" href="../xtal-chart-istic-sync.html">
           <dom-module id="my-component">
             <template>
               <xtal-chart-istic draw line-chart-data-with-options="[[example1]]"></xtal-chart-istic>
@@ -50,6 +50,7 @@ Polymer wrapper around the [chartist.js](https://gionkunz.github.io/chartist-js/
               }
             }
             customElements.define(MyComponent.is, MyComponent);
+        </script>
   </template>
   <my-component></my-component>
 </custom-element-demo>
