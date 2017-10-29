@@ -71,7 +71,19 @@
                 </script>
             </json-merge>
             <xtal-chart-istic draw pie-chart-data-with-options="[[example2]]"></xtal-chart-istic>
-            Example 3 SIMPLE BAR CHART<br>
+            Example 3 SIMPLE BAR CHART<br><br>
+            <json-merge watch="{}" result="{{example3}}">
+                <script type="application/json">
+                  [
+                    {
+                      "data": {
+                        "labels": [1, 2, 3, 4],
+                        "series": [[100, 120, 180, 200]]
+                      }
+                    }
+                  ]
+                </script>
+            </json-merge>
             <xtal-chart-istic draw bar-chart-data-with-options="[[example3]]"></xtal-chart-istic>
             Example 4 CONFIGURING CHART<br>
             <xtal-chart-istic draw line-chart-data-with-options="[[example4]]"></xtal-chart-istic>
@@ -87,13 +99,7 @@
               static get is() { return 'my-component'; }
               connectedCallback() {
                 super.connectedCallback();
-                this.example2 = 
-                this.example3 = {
-                  data: {
-                    labels: [1, 2, 3, 4],
-                    series: [[100, 120, 180, 200]]
-                  }
-                }
+                
                 this.example4 = {
                   data: {
                     labels: ['Week1', 'Week2', 'Week3', 'Week4', 'Week5', 'Week6'],
