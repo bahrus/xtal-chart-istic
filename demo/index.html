@@ -13,6 +13,7 @@
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../xtal-chart-istic.html">
   <link rel="import" href="default-theme.html">
+  <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
   <link rel="import" href="../../json-merge/json-merge.html">
 
   <custom-style>
@@ -51,7 +52,24 @@
               </json-merge>
             
             <xtal-chart-istic draw line-chart-data-with-options="[[example1]]"></xtal-chart-istic>
-            Example 2 Donut Chart with 270 degree angle<br>
+            Example 2 Donut Chart with 270 degree angle<br><br>
+            <json-merge watch="{}" result="{{example2}}">
+                <script type="application/json">
+                  [
+                    {
+                      "data": {
+                        "series": [20, 10, 30, 40]
+                      },
+                      "options": {
+                        "donut": true,
+                        "donutWidth": 20,
+                        "startAngle": 270,
+                        "total": 200
+                      }
+                    }
+                  ]
+                </script>
+            </json-merge>
             <xtal-chart-istic draw pie-chart-data-with-options="[[example2]]"></xtal-chart-istic>
             Example 3 SIMPLE BAR CHART<br>
             <xtal-chart-istic draw bar-chart-data-with-options="[[example3]]"></xtal-chart-istic>
@@ -69,17 +87,7 @@
               static get is() { return 'my-component'; }
               connectedCallback() {
                 super.connectedCallback();
-                this.example2 = {
-                  data: {
-                    series: [20, 10, 30, 40]
-                  },
-                  options: {
-                    donut: true,
-                    donutWidth: 20,
-                    startAngle: 270,
-                    total: 200
-                  }
-                }
+                this.example2 = 
                 this.example3 = {
                   data: {
                     labels: [1, 2, 3, 4],
