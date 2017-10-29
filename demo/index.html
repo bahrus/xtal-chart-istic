@@ -13,6 +13,7 @@
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../xtal-chart-istic.html">
   <link rel="import" href="default-theme.html">
+  <link rel="import" href="../../json-merge/json-merge.html">
 
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
@@ -29,7 +30,26 @@
       <template>
         <dom-module id="my-component">
           <template>
-            Example 1 CREATING A CHART WITH FIXED DIMENSIONS<br>
+              Example 1 CREATING A CHART WITH FIXED DIMENSIONS<br><br>
+              <json-merge watch="{}" result="{{example1}}">
+                  <script type="application/json">
+                    [
+                      {
+                        "data": {
+                          "labels": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                          "series": [
+                            [5, 2, 4, 2, 0]
+                          ]
+                        },
+                        "options": {
+                          "width": "600px",
+                          "height": "300px"
+                        }
+                      }
+                    ]
+                  </script>
+              </json-merge>
+            
             <xtal-chart-istic draw line-chart-data-with-options="[[example1]]"></xtal-chart-istic>
             Example 2 Donut Chart with 270 degree angle<br>
             <xtal-chart-istic draw pie-chart-data-with-options="[[example2]]"></xtal-chart-istic>
@@ -49,18 +69,6 @@
               static get is() { return 'my-component'; }
               connectedCallback() {
                 super.connectedCallback();
-                this.example1 = {
-                  data: {
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-                    series: [
-                      [5, 2, 4, 2, 0]
-                    ]
-                  },
-                  options: {
-                    width: '600px',
-                    height: '300px',
-                  }
-                }
                 this.example2 = {
                   data: {
                     series: [20, 10, 30, 40]
