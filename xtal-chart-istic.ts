@@ -71,6 +71,20 @@ export interface IXtalChartisticProperties{
                 };
 
             }
+
+            static get template(){
+                return `
+    <link rel="stylesheet" type="text/css" href="[[cssPath]]">
+    <style include="xtal-chart-istic-theme"></style>
+    <style>
+        :host {
+        display: block;
+        @apply --my-custom-chart-istic-mixin;
+        }
+    </style>
+    <div id="chartTarget"></div>
+                `;
+            }
             // _stampTemplate(template){
             //     console.log('before stamp template')
             //     super._stampTemplate(template);
