@@ -124,6 +124,39 @@
             <xtal-chart-istic draw line-chart-data-with-options="[[example4]]"></xtal-chart-istic>
             Example 5 RESPONSIVE SUGAR TOPPING
             <br>
+            <br>
+            <json-merge refs="[[refs]]" watch="{}" result="{{example5}}">
+                <script type="application/json">
+                [
+                  {
+                    "data": {
+                      "labels": ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                      "series": [
+                        [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+                        [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
+                      ]
+                    },
+                    "options": {
+                      "seriesBarDistance": 15
+                    },
+                    "responsiveOptions": [
+                      ["screen and (min-width: 641px) and (max-width: 1024px)", {
+                        "seriesBarDistance": 10,
+                        "axisX": {
+                          "labelInterpolationFnc": "${refs.labelInterpolationFnc2}"
+                        }
+                      }],
+                      ["screen and (max-width: 640px)", {
+                        "seriesBarDistance": 5,
+                        "axisX": {
+                          "labelInterpolationFnc": "${refs.labelInterpolationFnc3}"
+                        }
+                      }]
+                    ]
+                  }
+                ]
+                </script>
+            </json-merge>            
             <xtal-chart-istic draw bar-chart-data-with-options="[[example5]]"></xtal-chart-istic>
             Example 6 DIFFERENT CONFIGURATION FOR DIFFERENT SERIES
             <br>
@@ -141,6 +174,12 @@
                     value: {
                       labelInterpolationFnc: function (value) {
                         return '$' + value + 'm';
+                      },
+                      labelInterpolationFnc2: function(value){
+                        return value;
+                      },
+                      labelInterpolationFnc3: function(value){
+                        return value[0]
                       }
                     }
                   }
@@ -150,36 +189,6 @@
               connectedCallback() {
                 super.connectedCallback();
 
-                this.example5 = {
-                  data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    series: [
-                      [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
-                      [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
-                    ]
-                  },
-                  options: {
-                    seriesBarDistance: 15
-                  },
-                  responsiveOptions: [
-                    ['screen and (min-width: 641px) and (max-width: 1024px)', {
-                      seriesBarDistance: 10,
-                      axisX: {
-                        labelInterpolationFnc: function (value) {
-                          return value;
-                        }
-                      }
-                    }],
-                    ['screen and (max-width: 640px)', {
-                      seriesBarDistance: 5,
-                      axisX: {
-                        labelInterpolationFnc: function (value) {
-                          return value[0];
-                        }
-                      }
-                    }]
-                  ]
-                }
                 this.example6 = {
                   data: {
                     labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
