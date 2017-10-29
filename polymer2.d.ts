@@ -11,6 +11,12 @@ declare module Polymer{
         importPath(path: string, fnSuccess: Function, fnError: Function);
         notifyPath(path: string);
     }
+    export abstract class ElementMixin{
+        
+    }
+    export module CaseMap{
+        function camelToDashCase(s: string) : string;
+    }
 }
 
 declare namespace polymer{

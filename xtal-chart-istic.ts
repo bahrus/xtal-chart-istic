@@ -1,31 +1,33 @@
-module xtal.elements{
-    export interface IXtalLineChartDataWithOptions{
-        data: Chartist.IChartistData,
-        options: Chartist.ILineChartOptions,
-        responsiveOptions: Array<Chartist.IResponsiveOptionTuple<Chartist.ILineChartOptions>>
-    }
-    export interface IXtalPieChartDataWithOptions{
-        data: Chartist.IChartistData,
-        options: Chartist.IPieChartOptions,
-        responsiveOptions: Array<Chartist.IResponsiveOptionTuple<Chartist.IPieChartOptions>>
-    }
-    export interface IXtalBarChartDataWithOptions{
-        data: Chartist.IChartistData,
-        options: Chartist.IBarChartOptions,
-        responsiveOptions: Array<Chartist.IResponsiveOptionTuple<Chartist.IBarChartOptions>>
-    }
-    export interface IXtalChartisticProperties{
-        draw: boolean | polymer.PropObjectType,
-        lineChartDataWithOptions: IXtalLineChartDataWithOptions | polymer.PropObjectType,
-        pieChartDataWithOptions: IXtalPieChartDataWithOptions | polymer.PropObjectType,
-        barChartDataWithOptions: IXtalBarChartDataWithOptions | polymer.PropObjectType,
-        cssPath: string | polymer.PropObjectType,
-    }
-    function initXtalChartIstic(){
+declare var Chartist;
+export interface IXtalLineChartDataWithOptions{
+    data: Chartist.IChartistData,
+    options: Chartist.ILineChartOptions,
+    responsiveOptions: Array<Chartist.IResponsiveOptionTuple<Chartist.ILineChartOptions>>
+}
+export interface IXtalPieChartDataWithOptions{
+    data: Chartist.IChartistData,
+    options: Chartist.IPieChartOptions,
+    responsiveOptions: Array<Chartist.IResponsiveOptionTuple<Chartist.IPieChartOptions>>
+}
+export interface IXtalBarChartDataWithOptions{
+    data: Chartist.IChartistData,
+    options: Chartist.IBarChartOptions,
+    responsiveOptions: Array<Chartist.IResponsiveOptionTuple<Chartist.IBarChartOptions>>
+}
+export interface IXtalChartisticProperties{
+    draw: boolean | polymer.PropObjectType,
+    lineChartDataWithOptions: IXtalLineChartDataWithOptions | polymer.PropObjectType,
+    pieChartDataWithOptions: IXtalPieChartDataWithOptions | polymer.PropObjectType,
+    barChartDataWithOptions: IXtalBarChartDataWithOptions | polymer.PropObjectType,
+    cssPath: string | polymer.PropObjectType,
+}
+(function () {
+    let cs;
+    function initXtalChartIstic(polymerMixin : any){
         const elID = 'xtal-chart-istic';
         if(customElements.get(elID)) return;
-        type Constructor<T = {}> = new (...args: any[]) => T;
-        const initMerge = xtal.elements['InitMerge'];
+        // type Constructor<T = {}> = new (...args: any[]) => T;
+        // const initMerge = xtal.elements['InitMerge'];
         /**
          * `xtal-chart-istic`
          * Polymer wrapper around chartist.js charting library
@@ -34,7 +36,7 @@ module xtal.elements{
          * @polymer
          * @demo demo/index.html
          */
-        class XtalChartIstic extends initMerge(Polymer.Element)  implements IXtalChartisticProperties {
+        class XtalChartIstic extends polymerMixin(HTMLElement) implements IXtalChartisticProperties {
             draw: boolean;
             lineChartDataWithOptions: IXtalLineChartDataWithOptions;
             pieChartDataWithOptions: IXtalLineChartDataWithOptions;
@@ -46,7 +48,8 @@ module xtal.elements{
                 return {
                     draw:{
                         type: Boolean,
-                        observer: 'onPropChange'
+                        observer: 'onPropChange',
+                        reflectToAttribute: true,
                     },
                     barChartDataWithOptions:{
                         type: Object,
@@ -62,7 +65,8 @@ module xtal.elements{
                     },
                     cssPath:{
                         type: String,
-                        value: '../../chartist/dist/chartist.min.css'
+                        value: '../../chartist/dist/chartist.min.css',
+                        reflectToAttribute: true,
                     }
                 };
 
@@ -105,17 +109,14 @@ module xtal.elements{
         customElements.define(XtalChartIstic.is, XtalChartIstic);
     }
 
-    const syncFlag = 'xtal_elements_chart_istic_sync'
-    if(window[syncFlag]){
-        customElements.whenDefined('poly-prep-sync').then(() => initXtalChartIstic());
-        delete window[syncFlag];
-    }else{
-        if(customElements.get('poly-prep') || customElements.get('full-poly-prep')){
-            initXtalChartIstic();
-        }else{
-            customElements.whenDefined('poly-prep').then(() => initXtalChartIstic());
-            customElements.whenDefined('full-poly-prep').then(() => initXtalChartIstic());
+    function WaitForPolymer()
+    {
+        cs = document.currentScript;
+        if ((typeof Polymer !== 'function') || (typeof Polymer.ElementMixin !== 'function')) {
+           setTimeout( WaitForPolymer, 100);
+           return;
         }
-    
+        initXtalChartIstic(Polymer.ElementMixin);
     }
-}
+    WaitForPolymer();
+})();
