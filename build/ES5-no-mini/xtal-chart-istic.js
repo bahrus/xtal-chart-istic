@@ -42,6 +42,15 @@ function (_XtallatX) {
   }
 
   babelHelpers.createClass(XtalChartIstic, [{
+    key: "connectedCallback",
+    value: function connectedCallback() {
+      this._connected = true;
+
+      this._upgradeProperties([draw, 'lineChart', 'barChart', 'pieChart']);
+
+      this.onPropChange();
+    }
+  }, {
     key: "attributeChangedCallback",
     value: function attributeChangedCallback(name, oldVal, newVal) {
       switch (name) {

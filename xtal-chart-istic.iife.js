@@ -111,6 +111,11 @@ class XtalChartIstic extends XtallatX(HTMLElement) {
         this._barChart = val;
         this.onPropChange();
     }
+    connectedCallback() {
+        this._connected = true;
+        this._upgradeProperties([draw, 'lineChart', 'barChart', 'pieChart']);
+        this.onPropChange();
+    }
     static get is() { return 'xtal-chart-istic'; }
     get draw() {
         return this._draw;
