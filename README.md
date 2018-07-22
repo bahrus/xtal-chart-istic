@@ -1,12 +1,18 @@
 # \<xtal-chart-istic\>
 
-Vanilla-ish web component wrapper around the chartist library
+Vanilla-ish web component wrapper around the chartist library.
+
+The web component itself is ~1.4kb minified, gzipped.
+
+The chartist library is ~12kb minified, gzipped.
+
+The default css is ~1.4kb minified, gzipped.
 
 <!--
 ```
 <custom-element-demo>
   <template>
-      <div class="vertical-section-container centered">
+    <div class="vertical-section-container centered">
         <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.3/webcomponents-loader.js"></script>
         <script type="module" src="https://unpkg.com/xtal-chart-istic@0.0.2/xtal-chart-istic.iife.js"></script>
       <h3>Basic xtal-chart-istic demo</h3>
@@ -23,6 +29,29 @@ Vanilla-ish web component wrapper around the chartist library
            "height": "300px"
          }
        }
+       '></xtal-chart-istic>
+
+       <xtal-chart-istic draw pie-chart='
+       {
+        "data": {
+          "series": [20, 10, 30, 40]
+        },
+        "options": {
+          "donut": true,
+          "donutWidth": 20,
+          "startAngle": 270,
+          "total": 200
+        }
+      }
+       '></xtal-chart-istic>
+       
+       <xtal-chart-istic draw bar-chart='
+       {
+        "data": {
+          "labels": [1, 2, 3, 4],
+          "series": [[100, 120, 180, 200]]
+        }
+      }
        '></xtal-chart-istic>
     </div>
     </template>

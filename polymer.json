@@ -1,8 +1,32 @@
 {
   "npm": true,
+  "sources":[
+    "xtal-chart-istic.js",
+    "xtal-chart-istic.iife.js"
+  ],
   "lint": {
     "rules": [
       "polymer-3"
     ]
-  }
+  },
+  "builds":[
+    {
+      "name": "ES5",
+      "js": {"minify": true, "compile": true},
+      "html": {"minify": true},
+      "css" : {"minify": true}
+    },
+    {
+      "name": "ES6",
+      "js": {"minify": true, "compile": false},
+      "html": {"minify": true},
+      "css" : {"minify": true}
+    },
+    {
+      "name": "ES5-no-mini",
+      "js": {"minify": false, "compile": true},
+      "html": {"minify": false},
+      "css" : {"minify": false}
+    }    
+  ]
 }

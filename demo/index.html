@@ -24,6 +24,29 @@
          }
        }
        '></xtal-chart-istic>
+
+       <xtal-chart-istic draw pie-chart='
+       {
+        "data": {
+          "series": [20, 10, 30, 40]
+        },
+        "options": {
+          "donut": true,
+          "donutWidth": 20,
+          "startAngle": 270,
+          "total": 200
+        }
+      }
+       '></xtal-chart-istic>
+       
+       <xtal-chart-istic draw bar-chart='
+       {
+        "data": {
+          "labels": [1, 2, 3, 4],
+          "series": [[100, 120, 180, 200]]
+        }
+      }
+       '></xtal-chart-istic>
     </div>
   </body>
 </html>
