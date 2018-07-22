@@ -1,264 +1,35 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>xtal-chart-istic demo</title>
 
-  <title>xtal-chart-istic demo</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../xtal-chart-istic.html">
-  <link rel="import" href="default-theme.html">
-  <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
-  <link rel="import" href="../../json-merge/json-merge.html">
 
-  <custom-style>
-    <style is="custom-style" include="demo-pages-shared-styles">
-    </style>
-  </custom-style>
-</head>
+    <script type="module" src="../xtal-chart-istic.js"></script>
 
-<body>
-  <div class="vertical-section-container centered">
-    <h3>Basic xtal-chart-istic demo</h3>
-
-    <demo-snippet>
-      <template>
-        <dom-module id="my-component">
-          <template>
-            Example 1 CREATING A CHART WITH FIXED DIMENSIONS
-            <br>
-            <br>
-            <json-merge watch="{}" result="{{example1}}">
-              <script type="application/json">
-                    [
-                      {
-                        "data": {
-                          "labels": ["Mon", "Tue", "Wed", "Thu", "Fri"],
-                          "series": [
-                            [5, 2, 4, 2, 0]
-                          ]
-                        },
-                        "options": {
-                          "width": "600px",
-                          "height": "300px"
-                        }
-                      }
-                    ]
-                  </script>
-            </json-merge>
-
-            <xtal-chart-istic draw line-chart-data-with-options="[[example1]]"></xtal-chart-istic>
-            Example 2 Donut Chart with 270 degree angle
-            <br>
-            <br>
-            <json-merge watch="{}" result="{{example2}}">
-              <script type="application/json">
-                  [
-                    {
-                      "data": {
-                        "series": [20, 10, 30, 40]
-                      },
-                      "options": {
-                        "donut": true,
-                        "donutWidth": 20,
-                        "startAngle": 270,
-                        "total": 200
-                      }
-                    }
-                  ]
-                </script>
-            </json-merge>
-            <xtal-chart-istic draw pie-chart-data-with-options="[[example2]]"></xtal-chart-istic>
-            Example 3 SIMPLE BAR CHART
-            <br>
-            <br>
-            <json-merge watch="{}" result="{{example3}}">
-              <script type="application/json">
-                  [
-                    {
-                      "data": {
-                        "labels": [1, 2, 3, 4],
-                        "series": [[100, 120, 180, 200]]
-                      }
-                    }
-                  ]
-                </script>
-            </json-merge>
-            <xtal-chart-istic draw bar-chart-data-with-options="[[example3]]"></xtal-chart-istic>
-            Example 4 CONFIGURING CHART
-            <br>
-            <br>
-            <json-merge refs="[[refs]]" watch="{}" result="{{example4}}">
-              <script type="application/json">
-                [
-                  {
-                    "data": {
-                      "labels": ["Week1", "Week2", "Week3", "Week4", "Week5", "Week6"],
-                      "series": [
-                        [5, 4, 3, 7, 5, 10],
-                        [3, 2, 9, 5, 4, 6],
-                        [2, 1, -3, -4, -2, 0]
-                      ]
-                    },
-                    "options": {
-                      "showPoint": false,
-                      "lineSmooth": false,
-                      "axisX": {
-                        "showGrid": false,
-                        "showLabel": false
-                      },
-                      "axisY": {
-                        "offset": 60,
-                        "labelInterpolationFnc":  "${refs.labelInterpolationFnc}"
-                      }
-                    }
-                  }
-                ]
-                </script>
-            </json-merge>
-            <xtal-chart-istic draw line-chart-data-with-options="[[example4]]"></xtal-chart-istic>
-            Example 5 RESPONSIVE SUGAR TOPPING
-            <br>
-            <br>
-            <json-merge refs="[[refs]]" watch="{}" result="{{example5}}">
-                <script type="application/json">
-                [
-                  {
-                    "data": {
-                      "labels": ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                      "series": [
-                        [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
-                        [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
-                      ]
-                    },
-                    "options": {
-                      "seriesBarDistance": 15
-                    },
-                    "responsiveOptions": [
-                      ["screen and (min-width: 641px) and (max-width: 1024px)", {
-                        "seriesBarDistance": 10,
-                        "axisX": {
-                          "labelInterpolationFnc": "${refs.labelInterpolationFnc2}"
-                        }
-                      }],
-                      ["screen and (max-width: 640px)", {
-                        "seriesBarDistance": 5,
-                        "axisX": {
-                          "labelInterpolationFnc": "${refs.labelInterpolationFnc3}"
-                        }
-                      }]
-                    ]
-                  }
-                ]
-                </script>
-            </json-merge>            
-            <xtal-chart-istic draw bar-chart-data-with-options="[[example5]]"></xtal-chart-istic>
-            Example 6 DIFFERENT CONFIGURATION FOR DIFFERENT SERIES
-            <br>
-            <br>
-            <json-merge refs="[[refs]]" watch="{}" result="{{example6}}">
-                <script type="application/json">
-                [
-                  {
-                    "data": {
-                      "labels": ["1", "2", "3", "4", "5", "6", "7", "8"],
-                      "series": [{
-                        "name": "series-1",
-                        "data": [5, 2, -4, 2, 0, -2, 5, -3]
-                      }, {
-                        "name": "series-2",
-                        "data": [4, 3, 5, 3, 1, 3, 6, 4]
-                      }, {
-                        "name": "series-3",
-                        "data": [2, 4, 3, 1, 4, 5, 3, 2]
-                      }]
-                    },
-                    "options": {
-                      "fullWidth": true,
-                      "series": {
-                        "series-1": {
-                          "lineSmooth": "${refs.Chartist_Interpolation_step}"
-                        },
-                        "series-2": {
-                          "lineSmooth": "${refs.Chartist_Interpolation_simple}",
-                          "showArea": true
-                        },
-                        "series-3": {
-                          "showPoint": false
-                        }
-                      }
-                    },
-                    "responsiveOptions": [
-                      ["screen and (max-width: 320px)", {
-                        "series": {
-                          "series-1": {
-                            "lineSmooth": "${refs.Chartist_Interpolation_none}"
-                          },
-                          "series-2": {
-                            "lineSmooth": "${refs.Chartist_Interpolation_none}",
-                            "showArea": false
-                          },
-                          "series-3": {
-                            "lineSmooth": "${refs.Chartist_Interpolation_none}",
-                            "showPoint": true
-                          }
-                        }
-                      }]
-                    ]
-                  }
-                ]
-                </script>
-            </json-merge>
-            <xtal-chart-istic draw line-chart-data-with-options="[[example6]]"></xtal-chart-istic>
-          </template>
-        </dom-module>
-        <script>
-          function initMyComponent() {
-            class MyComponent extends Polymer.Element {
-              static get is() { return 'my-component'; }
-              static get properties() {
-                return {
-                  refs: {
-                    type: Object,
-                    value: {
-                      labelInterpolationFnc: function (value) {
-                        return '$' + value + 'm';
-                      },
-                      labelInterpolationFnc2: function(value){
-                        return value;
-                      },
-                      labelInterpolationFnc3: function(value){
-                        return value[0]
-                      },
-                      Chartist_Interpolation_step: Chartist.Interpolation.step(),
-                      Chartist_Interpolation_simple: Chartist.Interpolation.simple(),
-                      Chartist_Interpolation_none: Chartist.Interpolation.none()
-                    }
-                  }
-                }
-
-              }
-              connectedCallback() {
-                super.connectedCallback();
-
-                
-              }
-            }
-            customElements.define(MyComponent.is, MyComponent);
-          }
-          customElements.whenDefined('xtal-chart-istic').then(() => initMyComponent());
-        </script>
-        <my-component></my-component>
-      </template>
-
-    </demo-snippet>
-  </div>
-
-</body>
-
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic xtal-chart-istic demo</h3>
+       <xtal-chart-istic draw line-chart='
+       {
+         "data": {
+           "labels": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+           "series": [
+             [5, 2, 4, 2, 0]
+           ]
+         },
+         "options": {
+           "width": "600px",
+           "height": "300px"
+         }
+       }
+       '></xtal-chart-istic>
+    </div>
+  </body>
 </html>

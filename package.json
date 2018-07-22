@@ -1,0 +1,20 @@
+{
+  "name": "xtal-chart-istic",
+  "version": "0.0.0",
+  "description": "Vanilla-ish web component wrapper around the chartist library",
+  "main": "xtal-chart-istic.js",
+  "repository": "https://github.com/bahrus/xtal-chart-istic",
+  "author": "bahrus <anderson.bruce.b@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chartist": "^0.11.0",
+    "xtal-latx": "0.0.17"
+  },
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "wct-browser-legacy": "^1.0.0",
+    "@polymer/polymer": "^3.0.0",
+    "jiife": "^0.0.3"
+  }
+}
