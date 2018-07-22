@@ -1,6 +1,6 @@
 {
   "name": "xtal-chart-istic",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Vanilla-ish web component wrapper around the chartist library",
   "main": "xtal-chart-istic.js",
   "repository": "https://github.com/bahrus/xtal-chart-istic",
