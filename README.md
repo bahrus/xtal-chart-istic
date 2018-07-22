@@ -52,7 +52,7 @@ this.chart = new Chartist.Pie(
 );
 ```
 
-As you can see, there's a fourth sub property that can be passed in -- responsiveOptions, which are demonstrated frequently in the chartist examples.
+As you can see, there's a third sub property that can be passed in -- responsiveOptions, which are demonstrated frequently in the chartist examples.
 
 
 
